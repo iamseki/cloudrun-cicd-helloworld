@@ -68,7 +68,7 @@ workflows:
             - test
       - merge-master:
           requires:
-            - build
+            - build-gcloud
   deploy:
     jobs:
       - deploy-gcloud:
