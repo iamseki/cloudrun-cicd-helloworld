@@ -35,7 +35,7 @@ jobs:
             git pull origin master
             git merge dev --no-ff --no-edit
             git push origin master
-  build:
+  build-gcloud:
     <<: *defaults
     steps:
       - checkout
@@ -44,7 +44,7 @@ jobs:
       - run:
           name: "Deploy docker image to Cloud Build service"
           command: gcloud builds submit --tag gcr.io/${PROJECT_ID}/eventos-api
-  deploy:
+  deploy-gcloud:
     <<: *defaults
     steps:
       - checkout
@@ -56,20 +56,22 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  deploy:
+  test-build-merge:
     jobs:
       - test:
           filters:
             branches:
               only:
                 - dev
-      - build:
+      - build-gcloud:
           requires:
             - test
       - merge-master:
           requires:
             - build
-      - deploy:
+  deploy:
+    jobs:
+      - deploy-gcloud:
           filters:
             branches:
               only:
