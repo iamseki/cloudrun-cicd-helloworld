@@ -52,8 +52,8 @@ jobs:
           <<: *base 
       - run:
           name: "Deploy app to Cloud Run service"
-          command: gcloud run deploy eventos-api --image gcr.io/${PROJECT_ID}/eventos-api \
-                    --region us-east1 --cpu 1 --memory 1 \ 
+          command: gcloud run deploy eventos-api --image gcr.io/${PROJECT_ID}/eventos-api 
+                    --region us-east1 --cpu 1 --memory 1 
                     --allow-unauthenticated --platform managed 
 
 # Orchestrate our job run sequence
