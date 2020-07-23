@@ -1,5 +1,7 @@
 defaults: &defaults
   working_directory: ~/app
+  docker:
+    - image: google/cloud-sdk:latest
 
 version: 2.1
 
@@ -27,8 +29,6 @@ jobs:
             git push origin master
   build:
     <<: *defaults
-    docker:
-      - image: google/cloud-sdk:latest
     steps:
       - checkout
       - run: 
@@ -39,8 +39,6 @@ jobs:
             gcloud builds submit --tag gcr.io/${PROJECT_ID}/eventos-api
   deploy:
     <<: *defaults
-    docker:
-      - image: google/cloud-sdk:latest
     steps:
       - checkout
       - run: 
