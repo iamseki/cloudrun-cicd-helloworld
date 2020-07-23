@@ -34,7 +34,7 @@ jobs:
       - run: 
           name: "Deploy docker image to Cloud Build service"
           command: |
-            echo ${GOOGLE_CLOUD} > config.json
+            echo ${GOOGLE_CLOUD} | base64 -d > config.json
             gcloud auth activate-service-account --key-file=config.json
             gcloud builds submit --tag gcr.io/${PROJECT_ID}/eventos-api
   deploy:
@@ -44,7 +44,7 @@ jobs:
       - run: 
           name: "Deploy app to Cloud Run service"
           command: |
-            echo ${GOOGLE_CLOUD} > config.json
+            echo ${GOOGLE_CLOUD} | base64 -d > config.json
             gcloud auth activate-service-account --key-file=config.json
             gcloud run deploy eventos-api --image gcr.io/${PROJECT_ID}/eventos-api --region us-east1 --allow-unauthenticated --platform managed
 
