@@ -39,16 +39,18 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
+      - run: 
           <<: *base 
+      - run:
           name: "Deploy docker image to Cloud Build service"
           command: gcloud builds submit --tag gcr.io/${PROJECT_ID}/eventos-api
   deploy:
     <<: *defaults
     steps:
       - checkout
-      - run:
+      - run: 
           <<: *base 
+      - run:
           name: "Deploy app to Cloud Run service"
           command: gcloud run deploy eventos-api --image gcr.io/${PROJECT_ID}/eventos-api --region us-east1 --allow-unauthenticated --platform managed
 
@@ -66,7 +68,7 @@ workflows:
             - test
       - merge-master:
           requires:
-            - test
+            - build
       - deploy:
           requires:
             - build
