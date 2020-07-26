@@ -29,8 +29,8 @@ jobs:
       - run:
           name: Merging DEV into MASTER
           command: |
-            git config --global user.email "chrisyuri_19@hotmail.com"
-            git config --global user.name "iamseki"
+            git config --global user.email "fttsoftwarefactory@gmail.com"
+            git config --global user.name "ftt-jr-robot"
             git checkout master
             git pull origin master
             git merge dev --no-ff --no-edit
