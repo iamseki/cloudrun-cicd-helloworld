@@ -5,7 +5,7 @@ defaults: &defaults
 base: &base
   name: "Authenticate to GCP"
   command: |
-     echo ${GOOGLE_CLOUD} | base64 -d > config.json
+     echo ${GOOGLE_CLOUD} > config.json
      gcloud auth activate-service-account --key-file=config.json
      gcloud config set project ${PROJECT_ID}
   
